@@ -9,4 +9,5 @@ export default {
   token: {
     secret: 'this is super secret',
   },
+  port: 3001
 };
