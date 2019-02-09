@@ -2,7 +2,7 @@
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features of Client and Server (WPI)
+## Features of Client and Server (WIP)
 
 -	React [create-react-app](https://github.com/facebook/create-react-app)
 -	Sign Up, Sign In, Sign Out
