@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import {loginUser} from '../../services/auth.service';
+
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -44,8 +46,19 @@ class Login extends Component {
     this.setState({ [prop]: event.target.value });
   };
 
+
   handleClickShowPassword = () => {
     this.setState(state => ({ showPassword: !state.showPassword }));
+  };
+
+  handleSubmit = () => {
+
+    const {email, password} = this.state;
+    const data = {email, password};
+
+    loginUser(data).then(res => {
+      console.log(res)
+    })
   };
 
   render() {
@@ -125,8 +138,7 @@ class Login extends Component {
                     variant="body2"
                     onClick={() => {
                       alert("Password recovery isn't implemented yet!");
-                    }}
-                  >
+                    }}>
                     Forgot password?
                   </Link>
                 </Grid>
@@ -144,7 +156,7 @@ class Login extends Component {
                   </Button>
                 </Grid>
                 <Grid item xs={4}>
-                  <Button variant="contained" color="secondary">
+                  <Button variant="contained" color="secondary" onClick={() => this.handleSubmit()}>
                     Sign In
                   </Button>
                 </Grid>

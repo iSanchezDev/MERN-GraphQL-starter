@@ -9,6 +9,8 @@ import User from './entities/user/user.model';
 import { userResolvers, userTypeDefs } from './entities/user/user.schema';
 import {workspaceResolvers, workspaceTypeDefs} from './entities/workspace/workspace.schema';
 
+const PORT = process.env.PORT || config.port;
+
 /**
  * Connect to the mongodb database
  */
@@ -51,6 +53,6 @@ const server = new ApolloServer({
 });
 
 
-server.listen().then(({ url }) => {
+server.listen(PORT).then(({ url }) => {
   console.log(`🔥🚀 Server ready at ${url}`);
 });
