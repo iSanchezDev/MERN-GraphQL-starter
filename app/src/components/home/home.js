@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import './Home.css';
+import './home.css';
+import Login from './../login/login';
 
 class Home extends Component {
   render() {
-    return (<h1>Home</h1>);
+    return (
+      <div>
+        <Login/>
+      </div>
+    );
   }
 }
 

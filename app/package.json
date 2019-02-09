@@ -6,6 +6,9 @@
   "author": "Iván Sánchez <isancheznetwork@gmail.com>",
   "dependencies": {
     "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.2",
+    "classnames": "^2.2.6",
+    "prop-types": "^15.6.2",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-material-ui": "0.0.1",
