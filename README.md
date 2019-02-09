@@ -2,7 +2,7 @@
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features of Client and Server
+## Features of Client and Server (WPI)
 
 -	React [create-react-app](https://github.com/facebook/create-react-app)
 -	Sign Up, Sign In, Sign Out
@@ -14,6 +14,8 @@
 - Protected server endpoints by middleware
 - [Redux](https://es.redux.js.org), [Material Design](https://material-ui.com/) and user login windows
 
-## Wor In Progress
+## Installation
+
+Go to `./app` and `./api` folders and follow their READMEs files
 
 😊👍
