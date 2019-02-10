@@ -21,16 +21,11 @@ export const userTypeDefs = `
   input UserFilterInput {
     limit: Int
   }
-  
-  input Token {
-    token: String!
-  }
 
   # Extending the root Query type.
   extend type Query {
     users(filter: UserFilterInput): [User]
     user(id: String!): User
-    isUserLogged(token: String!): String
   }
 
   # We do not need to check if any of the input parameters exist with a "!" character.
@@ -49,7 +44,6 @@ export const userTypeDefs = `
     addUser(input: UserInput!): User
     editUser(id: String!, input: UserInput!): User
     deleteUser(id: String!): User
-    loginUser(email: String!, password: String!): String!
   }
 `;
 
@@ -69,15 +63,7 @@ export const userResolvers = {
     async user(_, { id }) {
       const user: any = await User.findById(id);
       return user.toGraph();
-    },
-    async isUserLogged(_, { token }) {
-      return jwt.verify(token, config.token.secret, (err) => {
-        if (err) {
-          return 'This user is not authenticated'
-        }
-        return 'Logged'
-      });
-    },
+    }
   },
   Mutation: {
     async addUser(_, { input }) {
@@ -91,19 +77,7 @@ export const userResolvers = {
     async deleteUser(_, { id }) {
       const user: any = await User.findByIdAndRemove(id);
       return user ? user.toGraph() : null;
-    },
-    async loginUser(_, { email, password }) {
-      const user: any = await User.findOne({ email });
-      const match: boolean = await user.comparePassword(password);
-      if (match) {
-        return jwt.sign({
-          id: user.id,
-          email: user.email },
-          config.token.secret,
-          { expiresIn: '1d' });
-      }
-      throw new Error('Not Authorised.');
-    },
+    }
   },
   User: {
     async workspace(user: { workspaceId: string }) {

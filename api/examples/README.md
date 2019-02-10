@@ -68,16 +68,3 @@ mutation UpdateUserWithWorkspace {
   }
 }
 ```
-
-## Login
-```graphql
-mutation loginUser {
-  loginUser(email: "example@gmail.com", password: "example")
-}
-
-query isUserLogged {
-  isUserLogged(
-    token: "<INSERT_YOUR_TOKEN_SESSION>"
-  )
-}
-```
