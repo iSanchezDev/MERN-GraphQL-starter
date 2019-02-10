@@ -6,7 +6,7 @@ class AuthService {
    * @returns {AuthService}
    */
   constructor() {
-    this.baseUrl = 'http://localhost:3001'
+    this.baseUrl = 'http://localhost:3001/auth'
   }
 
   /**
