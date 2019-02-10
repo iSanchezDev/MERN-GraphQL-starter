@@ -96,7 +96,11 @@ export const userResolvers = {
       const user: any = await User.findOne({ email });
       const match: boolean = await user.comparePassword(password);
       if (match) {
-        return jwt.sign({ id: user.id }, config.token.secret);
+        return jwt.sign({
+          id: user.id,
+          email: user.email },
+          config.token.secret,
+          { expiresIn: '1d' });
       }
       throw new Error('Not Authorised.');
     },
