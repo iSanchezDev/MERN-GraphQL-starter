@@ -4,29 +4,9 @@ A few examples were added to use this tool.
 
 Open the browser at `localhost:3001/graphql`
 
-To run GraphQL queries you need a token access.
+To run GraphQL queries you need to be logged by a bearer token access.
 
-You must create a login to catch up this session token:
-
-## Login
-
-Note: *Sorry, the user should have been inserted on the interface beforehand.*
-
-```graphql
-mutation loginUser {
-  loginUser(email: "example@gmail.com", password: "example")
-}
-```
-
-Note: Copy the token given
-
-Look up the bottom of Apollo web `HTTP HEADERS` label like:
-
-```json5
-{
-   "Authorization": "Bearer <_PASTE_YOUR TOKEN_>"
- }
-```
+Please, follow these steps!
 
 ## Insert a new user
 
@@ -44,32 +24,56 @@ mutation AddUser (
     firstName: $firstName,
     language: $language
  }) {
-    id
+    email,
+  	firstName,
+  	language
   } 
 }
 
-query GetAllUsers {
-  users {
-    email
-  }
-}
-
-PLACE AT QUERY VARIABLES TAB
+<PLACE THIS JSON AT QUERY VARIABLES TAB>
 
 {
   "email": "example@gmail.com",
   "password": "example",
-  "firstName": "exam",
+  "firstName": "example",
   "language": "en"
 }
 ```
 
-# Workspace
+## Login
+
+```graphql
+mutation LoginUser {
+  loginUser(email: "example@gmail.com", password: "example")
+}
+```
+
+Note: Copy the token given from the response.
+
+Look up the bottom of Apollo web `HTTP HEADERS` tab like:
+
+```json5
+{
+   "Authorization": "Bearer <_PASTE_YOUR TOKEN_>"
+}
+```
+
+## Users
+```graphql
+query GetAllUsers {
+  users {
+    email,
+    firstName
+  }
+}
+```
+
+## Workspace
+Now you can run these queries:
 
 ```graphql
 query GetWorkspaces {
   workspaces {
-    id
     name
   }
 }

@@ -1,7 +1,9 @@
 
 import express from 'express';
 import cors from 'cors';
+import * as _ from 'lodash';
 import schema from './schema';
+import {allowedQueries} from './schema/config';
 import config from './config';
 import mongoose from 'mongoose';
 import authRoutes from './routes/auth.routes';
@@ -30,7 +32,6 @@ app.use(cors());
  */
 app.use('/auth', authRoutes);
 
-
 const server = new ApolloServer({
   schema,
   formatError(error) {
@@ -38,15 +39,24 @@ const server = new ApolloServer({
     return error;
   },
   async context({ req }) {
+
+    // GraphQL functions allowed without token access
+    const query = req.body.operationName;
+    const allowed = _.find(allowedQueries, (name) => name === query);
+    if (allowed) {
+      return true
+    }
+
+    // Authorization token
     const token = req && req.headers && req.headers.authorization;
     if (token) {
       const user: any = await verifyToken(token);
       if (user) {
-        return { user };
+        return {user};
       }
-    } else {
-      throw new AuthenticationError('You must be logged in or connect using a bearer token on headers');
     }
+
+    throw new AuthenticationError('You must be logged in!');
   },
 });
 
