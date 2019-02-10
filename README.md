@@ -11,7 +11,7 @@ I have a REST service on express for login and logout users in a secure mode iso
 
 ## Client
 
-The client allows you to connect with the GraphQL API to requesting a user list and workspaces as example in how to work 
+The client allows you to connect with the GraphQL API requesting a user list and workspaces as example in how to work 
 with React and GraphQL at the frontend side. 
 
 ## Features of Client and Server (WIP)

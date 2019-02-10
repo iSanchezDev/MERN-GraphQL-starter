@@ -4,7 +4,8 @@
 
 ## Requirements 
 
-- Use mongodb with [mongoose](https://github.com/Automattic/mongoose) for data validation.
+- Node ^8
+- Mongodb ([mongoose](https://github.com/Automattic/mongoose)) default port and configuration.
 
 ## Install
 
