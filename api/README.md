@@ -38,5 +38,12 @@ npm run start:ts
 
 ## Examples
   
-
 `./examples/README.md` 
+
+## Warning
+
+The implementation provided in this repo is not production-ready code and it’s not secure enough to integrate in your 
+application starightaway. The purpose of this code is to extend the information given in GraphQL documentation. You can read 
+a lot of discussions (here or there) about using JWT, its advantages, disadvantages and different ways to store them.
+
+Note: If you use Token Authentication in production you must ensure that your API is only available over https. And also CORS MUST be disabled (enabled here to simplify the example)

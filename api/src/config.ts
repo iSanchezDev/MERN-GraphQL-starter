@@ -7,7 +7,7 @@ export default {
     uri: 'mongodb://localhost/graphql-demo',
   },
   token: {
-    secret: 'this is super secret',
-  },
-  port: 3001
+    secret: 'theSuperSecretPassword',
+    expire: '3h'
+  }
 };

@@ -1,10 +1,12 @@
 ## Examples
 
-A few examples were added to start using this tool.
+A few examples were added to use this tool.
 
-Make sure you are running the browser at localhost:4000  
+Open the browser at `localhost:3001/graphql`
 
-Here are some example queries which you can use as a starting point when using the playground.
+To run GraphQL queries you need to be logged by a bearer token access.
+
+Please, follow these steps!
 
 ## Insert a new user
 
@@ -22,32 +24,56 @@ mutation AddUser (
     firstName: $firstName,
     language: $language
  }) {
-    id
+    email,
+  	firstName,
+  	language
   } 
 }
 
-query GetAllUsers {
-  users {
-    email
-  }
-}
-
-PLACE AT QUERY VARIABLES TAB
+<PLACE THIS JSON AT QUERY VARIABLES TAB>
 
 {
   "email": "example@gmail.com",
   "password": "example",
-  "firstName": "exam",
+  "firstName": "example",
   "language": "en"
 }
 ```
 
-# Workspace
+## Login
+
+```graphql
+mutation LoginUser {
+  loginUser(email: "example@gmail.com", password: "example")
+}
+```
+
+Note: Copy the token given from the response.
+
+Look up the bottom of Apollo web `HTTP HEADERS` tab like:
+
+```json5
+{
+   "Authorization": "Bearer <_PASTE_YOUR TOKEN_>"
+}
+```
+
+## Users
+```graphql
+query GetAllUsers {
+  users {
+    email,
+    firstName
+  }
+}
+```
+
+## Workspace
+Now you can run these queries:
 
 ```graphql
 query GetWorkspaces {
   workspaces {
-    id
     name
   }
 }
@@ -66,18 +92,5 @@ mutation UpdateUserWithWorkspace {
       name
     } 
   }
-}
-```
-
-## Login
-```graphql
-mutation loginUser {
-  loginUser(email: "example@gmail.com", password: "example")
-}
-
-query isUserLogged {
-  isUserLogged(
-    token: "<INSERT_YOUR_TOKEN_SESSION>"
-  )
 }
 ```

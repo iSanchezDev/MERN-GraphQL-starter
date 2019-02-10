@@ -1,35 +1,37 @@
-import jwt from 'jsonwebtoken';
-import { ApolloServer, AuthenticationError } from 'apollo-server';
-import { makeExecutableSchema } from 'graphql-tools';
-import config from './config';
-import { merge } from 'lodash';
-import mongoose from 'mongoose';
-import rootTypeDefs from './root';
-import User from './entities/user/user.model';
-import { userResolvers, userTypeDefs } from './entities/user/user.schema';
-import {workspaceResolvers, workspaceTypeDefs} from './entities/workspace/workspace.schema';
 
-const PORT = process.env.PORT || config.port;
+import express from 'express';
+import cors from 'cors';
+import * as _ from 'lodash';
+import schema from './schema';
+import {allowedQueries} from './schema/config';
+import config from './config';
+import mongoose from 'mongoose';
+import authRoutes from './routes/auth.routes';
+import { AuthenticationError } from 'apollo-server';
+import { ApolloServer } from 'apollo-server-express';
+import {verifyToken} from './controllers/auth/auth.controller';
+
+const port = process.env.PORT || 3001;
 
 /**
- * Connect to the mongodb database
+ * Mongodb database connection
  */
 mongoose.connect(
   config.mongodb.uri,
   { useNewUrlParser: true }
 );
 
-/**
- * Schema declaration for GraphQL types and resolvers
+/*
+ * Express config
  */
-const schema = makeExecutableSchema({
-  typeDefs: [rootTypeDefs, userTypeDefs, workspaceTypeDefs],
-  resolvers: merge(userResolvers, workspaceResolvers),
-});
+const app = express();
+app.use(cors());
 
-/**
- * Apollo server to send your queries
+/*
+ * Customize your routes
  */
+app.use('/auth', authRoutes);
+
 const server = new ApolloServer({
   schema,
   formatError(error) {
@@ -37,22 +39,30 @@ const server = new ApolloServer({
     return error;
   },
   async context({ req }) {
+
+    // GraphQL functions allowed without token access
+    const query = req.body.operationName;
+    const allowed = _.find(allowedQueries, (name) => name === query);
+    if (allowed) {
+      return true
+    }
+
+    // Authorization token
     const token = req && req.headers && req.headers.authorization;
     if (token) {
-      const data: any = jwt.verify(token, config.token.secret);
-
-      if (!data) {
-        throw new AuthenticationError('You must provide a valid login');
+      const user: any = await verifyToken(token);
+      if (user) {
+        return {user};
       }
-      const user = data.id ? await User.findById(data.id) : null;
-      return { user };
     }
-    // TODO --- UNCOMMENT LINE BELOW TO REQUIRE A TOKEN ACCESS ----
-    // throw new AuthenticationError('You must be logged in');
+
+    throw new AuthenticationError('You must be logged in!');
   },
 });
 
+server.applyMiddleware({app});
 
-server.listen(PORT).then(({ url }) => {
-  console.log(`🔥🚀 Server ready at ${url}`);
+app.listen(port,  () => {
+  console.log(`🚀 Server ready at http://localhost:${port}`);
+  console.log(`🔥 Apollo Web Client ready at http://localhost:${port}${server.graphqlPath}`);
 });
