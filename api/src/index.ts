@@ -1,6 +1,6 @@
 
 import express from 'express'
-import bodyParser from 'body-parser'
+import cors from 'cors'
 import schema from './schema'
 import config from './config'
 import graphqlHTTP from 'express-graphql'
@@ -8,9 +8,14 @@ import mongoose from 'mongoose';
 import authRoutes from './routes/auth.routes'
 import { verifyToken } from './controllers/auth/auth.controller';
 
-const app = express();
 const port = process.env.PORT || 3001;
 const dev = process.env.NODE_ENV === 'development';
+
+/*
+ * Express config
+ */
+const app = express();
+app.use(cors());
 
 /**
  * Mongodb database connection
@@ -24,19 +29,6 @@ mongoose.connect(
  * Place your custom routes here
  */
 app.use('/auth', authRoutes);
-
-/*
- * Allow-cors middleware
- */
-app.use('*', (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  if (req.method === 'OPTIONS') {
-    res.sendStatus(200);
-  } else {
-    next();
-  }
-});
 
 /*
  * Auth middleware
