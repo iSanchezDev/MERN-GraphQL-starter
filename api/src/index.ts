@@ -5,11 +5,11 @@ import schema from './schema'
 import config from './config'
 import graphqlHTTP from 'express-graphql'
 import mongoose from 'mongoose';
-import { createToken, verifyToken } from './controllers/auth/auth'
+import authRoutes from './routes/auth.routes'
+import { verifyToken } from './controllers/auth/auth.controller';
 
 const app = express();
 const port = process.env.PORT || 3001;
-const jsonParser = bodyParser.json();
 const dev = process.env.NODE_ENV === 'development';
 
 /**
@@ -21,6 +21,11 @@ mongoose.connect(
 );
 
 /*
+ * Place your custom routes here
+ */
+app.use('/auth', authRoutes);
+
+/*
  * Allow-cors middleware
  */
 app.use('*', (req, res, next) => {
@@ -30,34 +35,6 @@ app.use('*', (req, res, next) => {
     res.sendStatus(200);
   } else {
     next();
-  }
-});
-
-app.use('/login', jsonParser, async (req, res) => {
-  if (req.method === 'POST') {
-    const token = await createToken(req.body.email, req.body.password);
-    if (token) {
-      res.status(200).json({token})
-    } else {
-      res.status(403).json({
-        message: 'Login failed! Invalid credentials :('
-      })
-    }
-  }
-});
-
-app.use('/verifyToken', jsonParser, async (req, res) => {
-  if (req.method === 'POST') {
-    try {
-      const token = req.headers.authorization;
-      const user = await verifyToken(token);
-      res.status(200).json({user});
-    } catch (e) {
-      // unauthorized token
-      res.status(401).json({
-        message: e.message
-      })
-    }
   }
 });
 
