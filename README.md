@@ -34,3 +34,9 @@ with React and GraphQL at the frontend side.
 Go to `./app` and `./api` folders and follow their READMEs files
 
 😊👍
+
+## Demo Gif
+
+![apollo graphql](https://user-images.githubusercontent.com/25980900/52540450-bf042480-2d89-11e9-99b4-6535e035097b.gif)
+
+![React Login](https://user-images.githubusercontent.com/25980900/52540451-bf9cbb00-2d89-11e9-8b2d-3392d0e2ca18.gif)
