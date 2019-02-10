@@ -10,7 +10,6 @@ import { ApolloServer } from 'apollo-server-express';
 import {verifyToken} from './controllers/auth/auth.controller';
 
 const port = process.env.PORT || 3001;
-const dev = process.env.NODE_ENV === 'development';
 
 /**
  * Mongodb database connection
@@ -50,6 +49,7 @@ const server = new ApolloServer({
     }
   },
 });
+
 server.applyMiddleware({app});
 
 app.listen(port,  () => {
