@@ -8,7 +8,6 @@ export default {
   },
   token: {
     secret: 'theSuperSecretPassword',
-    tokenPrefix: 'JWT',
     expiresIn: '3h'
   }
 };

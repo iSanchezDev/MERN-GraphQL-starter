@@ -5,6 +5,7 @@ import Home from './../components/home/home';
 import Navbar from './../components/navbar/navbar';
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">

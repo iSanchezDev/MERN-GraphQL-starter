@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as _ from 'lodash';
-import { withStyles } from '@material-ui/core/styles';
-import {loginUser} from '../../services/auth.service';
+import connect from 'react-redux/es/connect/connect';
+import {login, logout, verifyToken} from '../../actions/auth.actions';
 
+import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -16,8 +16,6 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
-import connect from 'react-redux/es/connect/connect';
-import {userLogged} from '../../actions/auth.actions';
 
 const styles = theme => ({
   root: {
@@ -47,9 +45,13 @@ class Login extends Component {
   };
 
   constructor(props) {
-    super(props)
+    super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentWillMount() {
+    this.props.isUserLogged()
   }
 
   handleChange = prop => event => {
@@ -62,29 +64,21 @@ class Login extends Component {
   };
 
   handleSubmit = () => {
-
-    this.setState({loading: true})
-
-    let error = '';
+    this.setState({loading: true});
     const {email, password} = this.state;
     const data = {email, password};
 
     // Animation purpose
     setTimeout(() => {
-      loginUser(data).then(res => {
-        if (res.error) {
-          error = 'Authentication failed';
-          this.props.setUserLogged(false);
-        }
-        this.props.setUserLogged(true);
-        this.setState({loading: false, error: error})
-      })
+      this.props.loginUser(data);
+      this.setState({loading: false});
     }, 1500)
   };
 
   render() {
-    const {classes} = this.props;
     const {loading} = this.state;
+    const {classes} = this.props;
+    const {isFailure} = this.props.auth;
 
     return (
       <div>
@@ -184,6 +178,12 @@ class Login extends Component {
                     </Button>
                   </Grid>
                 </Grid>
+
+                {isFailure &&
+                  <Typography component="h2" color="error">
+                    Authentication Failed, please try again...
+                  </Typography>
+                }
               </Paper>
             </Paper>
           </Grid>
@@ -201,14 +201,13 @@ const mapStateToProps = (state) => {
   return {
     auth: state.auth
   }
-}
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, props) => {
   return {
-    setUserLogged: (state) => {
-      dispatch(userLogged(state))
-    }
+    loginUser: (params) => dispatch(login(params)),
+    isUserLogged: (params) => dispatch(verifyToken(params)),
   }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login));

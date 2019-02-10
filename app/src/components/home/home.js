@@ -8,9 +8,9 @@ import Typography from '@material-ui/core/Typography';
 class Home extends Component {
   render() {
 
-    const {auth} = this.props;
+    const {isAuthenticated} = this.props.auth;
 
-    if (!auth.logged) return <Login/>
+    if (!isAuthenticated) return <Login/>;
 
     return (
       <Grid
@@ -35,4 +35,5 @@ const mapStateToProps = (state) => {
     auth: state.auth
   }
 }
+
 export default connect(mapStateToProps)(Home);
