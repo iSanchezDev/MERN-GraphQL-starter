@@ -1,10 +1,32 @@
 ## Examples
 
-A few examples were added to start using this tool.
+A few examples were added to use this tool.
 
-Make sure you are running the browser at localhost:4000  
+Open the browser at `localhost:3001/graphql`
 
-Here are some example queries which you can use as a starting point when using the playground.
+To run GraphQL queries you need a token access.
+
+You must create a login to catch up this session token:
+
+## Login
+
+Note: *Sorry, the user should have been inserted on the interface beforehand.*
+
+```graphql
+mutation loginUser {
+  loginUser(email: "example@gmail.com", password: "example")
+}
+```
+
+Note: Copy the token given
+
+Look up the bottom of Apollo web `HTTP HEADERS` label like:
+
+```json5
+{
+   "Authorization": "Bearer <_PASTE_YOUR TOKEN_>"
+ }
+```
 
 ## Insert a new user
 

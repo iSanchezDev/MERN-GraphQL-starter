@@ -44,6 +44,7 @@ export const userTypeDefs = `
     addUser(input: UserInput!): User
     editUser(id: String!, input: UserInput!): User
     deleteUser(id: String!): User
+    loginUser(email: String!, password: String!): String!
   }
 `;
 
@@ -77,7 +78,19 @@ export const userResolvers = {
     async deleteUser(_, { id }) {
       const user: any = await User.findByIdAndRemove(id);
       return user ? user.toGraph() : null;
-    }
+    },
+    async loginUser(_, { email, password }) {
+      const user: any = await User.findOne({ email });
+      const match: boolean = await user.comparePassword(password);
+      if (match) {
+        return jwt.sign({
+          id: user.id,
+          email: user.email },
+          config.token.secret,
+          { expiresIn: config.token.expire });
+      }
+      throw new Error('Not Authorised.');
+    },
   },
   User: {
     async workspace(user: { workspaceId: string }) {

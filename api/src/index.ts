@@ -1,12 +1,13 @@
 
-import express from 'express'
-import cors from 'cors'
-import schema from './schema'
-import config from './config'
-import graphqlHTTP from 'express-graphql'
+import express from 'express';
+import cors from 'cors';
+import schema from './schema';
+import config from './config';
 import mongoose from 'mongoose';
 import authRoutes from './routes/auth.routes';
-import graphqlMiddleware from './middleware/graphql.middleware';
+import { AuthenticationError } from 'apollo-server';
+import { ApolloServer } from 'apollo-server-express';
+import {verifyToken} from './controllers/auth/auth.controller';
 
 const port = process.env.PORT || 3001;
 const dev = process.env.NODE_ENV === 'development';
@@ -31,20 +32,27 @@ app.use(cors());
 app.use('/auth', authRoutes);
 
 
-/*
- * GraphQL using express
- */
-app.use(graphqlMiddleware);
-
-app.use('/graphql', graphqlHTTP((req, res) => ({
-    schema,
-    graphiql: dev,
-    context: {
-      user: req.user,
+const server = new ApolloServer({
+  schema,
+  formatError(error) {
+    console.warn(error);
+    return error;
+  },
+  async context({ req }) {
+    const token = req && req.headers && req.headers.authorization;
+    if (token) {
+      const user: any = await verifyToken(token);
+      if (user) {
+        return { user };
+      }
+    } else {
+      throw new AuthenticationError('You must be logged in or connect using a bearer token on headers');
     }
-  }))
-);
+  },
+});
+server.applyMiddleware({app});
 
 app.listen(port,  () => {
-  console.log(`🔥🚀 Server ready at http://localhost:${port}`);
+  console.log(`🚀 Server ready at http://localhost:${port}`);
+  console.log(`🔥 Apollo Web Client ready at http://localhost:${port}${server.graphqlPath}`);
 });
