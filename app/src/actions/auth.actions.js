@@ -29,18 +29,18 @@ const receiveProfile = (data) => ({
 
 export const login = (params) => async dispatch => {
   try {
-    const token = await AuthService.login(params)
+    const token = await AuthService.login(params);
     LocalStorage.setToken(token);
-    dispatch(loginSuccess())
+    dispatch(loginSuccess());
   } catch (e) {
     console.error(e.message);
-    dispatch(loginFailure())
+    dispatch(loginFailure());
   }
 };
 
-export const logout = () => dispatch => { //destroy token and logout
-  LocalStorage.removeToken()
-  dispatch(logoutAction())
+export const logout = () => dispatch => { // destroy token and logout
+  LocalStorage.removeToken();
+  dispatch(logoutAction());
 };
 
 
@@ -55,8 +55,7 @@ export const verifyToken = () => async dispatch => {
     dispatch(receiveProfile(user));
     dispatch(loginSuccess());
   } catch (e) {
-    //remove token and logout if invalid
-    console.error(e.message);
+    console.error(e.message); // remove token and logout if invalid
     LocalStorage.removeToken();
     dispatch(logoutAction());
   }

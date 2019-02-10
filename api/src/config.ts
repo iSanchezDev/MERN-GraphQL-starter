@@ -8,6 +8,6 @@ export default {
   },
   token: {
     secret: 'theSuperSecretPassword',
-    expiresIn: '3h'
+    expire: '3h'
   }
 };

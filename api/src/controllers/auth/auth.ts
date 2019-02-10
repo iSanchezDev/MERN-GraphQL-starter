@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import config from './../../config'
 import User from '../../schema/user/user.model';
 
-const { secret, expiresIn }  = config.token;
+const { secret, expire }  = config.token;
 
 /**
  * Use email as login, use password as password
@@ -19,7 +19,7 @@ export async function createToken(email, password) {
     const match: boolean = await user.comparePassword(password);
 
     if (match) {
-      return jwt.sign({email: user.email }, secret);
+      return jwt.sign({email: user.email }, secret, {expiresIn: expire});
     }
   }
   return false
