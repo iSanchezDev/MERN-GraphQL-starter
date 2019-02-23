@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "API implementation of GraphQL.",
   "author": "Iván Sánchez <isancheznetwork@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iSanchezDev/MERN-GraphQL-starter"
+  },
   "main": "src/index.js",
   "scripts": {
     "start": "node build/index.js",
@@ -49,5 +53,6 @@
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
     "tslint-eslint-rules": "^5.4.0"
-  }
+  },
+  "license": "MIT"
 }
