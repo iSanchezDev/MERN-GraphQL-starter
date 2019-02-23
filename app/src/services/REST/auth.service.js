@@ -48,7 +48,6 @@ class AuthService {
    */
   async login(params) {
     const res = await this.apiCall('/login', params);
-    console.log(res)
     return res.token
   }
 

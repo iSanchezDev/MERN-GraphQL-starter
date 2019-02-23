@@ -14,10 +14,6 @@ const logoutAction = () => ({
   type: 'AUTH_LOGOUT'
 });
 
-const requestProfile = () => ({
-  type: 'AUTH_REQUEST_PROFILE',
-});
-
 const receiveProfile = (data) => ({
   type: 'AUTH_RECEIVE_PROFILE',
   data
@@ -50,7 +46,6 @@ export const verifyToken = () => async dispatch => {
     return
   }
   try {
-    dispatch(requestProfile());
     const user =await AuthService.verifyToken(LocalStorage.getToken());
     dispatch(receiveProfile(user));
     dispatch(loginSuccess());

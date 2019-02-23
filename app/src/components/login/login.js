@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import connect from 'react-redux/es/connect/connect';
-import {login, logout, verifyToken} from '../../actions/auth.actions';
+import {login, verifyToken} from '../../actions/auth.actions';
 
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';

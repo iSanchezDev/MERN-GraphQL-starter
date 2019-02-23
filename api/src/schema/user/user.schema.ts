@@ -4,7 +4,7 @@ import config from '../../config';
 import Workspace from '../workspace/workspace.model';
 
 /**
- * Export a string which contains our GraphQL type definitions.
+ * Export a string which contains our graphql type definitions.
  */
 export const userTypeDefs = `
 
