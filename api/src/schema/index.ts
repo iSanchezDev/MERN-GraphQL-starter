@@ -5,7 +5,7 @@ import { userResolvers, userTypeDefs } from './user/user.schema';
 import {workspaceResolvers, workspaceTypeDefs} from './workspace/workspace.schema';
 
 /**
- * Schema declaration for GraphQL types and resolvers
+ * Schema declaration for graphql types and resolvers
  */
 export default makeExecutableSchema({
   typeDefs: [rootTypeDefs, userTypeDefs, workspaceTypeDefs],

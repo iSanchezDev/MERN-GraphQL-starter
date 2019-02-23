@@ -1,18 +1,23 @@
-### React + Redux + Material UI + JWT Authentication + GraphQL API (boilerplate)
+### GraphQL API using React + Redux + Material UI + JWT (boilerplate)
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## API
+## Description
 
-The API designed for GraphQL has JWT authorization implemented for users from the client app and also for Apollo Client 
-web tool. You can exec queries on this tool even in your production environment. 
-
-I have a REST service on express for login and logout users in a secure mode isolated from GraphQL.
+This project aims to get `GraphQL` `query` and `mutation` examples from the client side made for a `MERN` stack development.
 
 ## Client
 
-The client allows you to connect with the GraphQL API requesting a user list and workspaces as example in how to work 
-with React and GraphQL at the frontend side. 
+The client allows you to connect with the `GraphQL API` it request a user list and also adding users as example.
+
+## API
+
+Was designed on `TypeScript` for `GraphQL` has `JWT` authorization implemented for users from the client app and also 
+for `Apollo Client` web tool. 
+
+Run your queries safely on this tool even in your future production environment with the auth middleware implemented. 
+
+I have a REST service on express for `login` and `logout` users in a secure mode isolated from GraphQL.
 
 ## Features of Client and Server (WIP)
 
@@ -22,18 +27,15 @@ with React and GraphQL at the frontend side.
 -	Sign Up, Sign In, Sign Out (REST isolated service using redux for react)
 - API [GraphQL](https://graphql.org) with [Apollo Client](https://www.apollographql.com/docs/react/essentials/get-started.html)
 -	Node.js with [Apollo Server](https://www.apollographql.com/docs/apollo-server/) on TypeScript
--	Queries, Mutations, Subscriptions + examples
+-	API with Queries, Mutations, Subscriptions + examples
+-	CLIENT listing users through GraphQL and add new ones
 -	Entities: users and workspaces
 -	Authentication powered by [JWT](https://jwt.io/) (React client)
 - Protected server endpoints by middleware + Apollo interface
-- WIP - React router
-- WIP - fetch users and workspaces from GraphQL service
 
 ## Installation
 
-Go to `./app` and `./api` folders and follow their READMEs files
-
-😊👍
+Go to `./app` and `./api` folders and follow their READMEs files 😊👍
 
 ## Demo Gif
 

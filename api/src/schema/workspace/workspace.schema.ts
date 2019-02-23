@@ -1,7 +1,7 @@
 import Workspace from './workspace.model';
 
 /**
- * Export a string which contains our GraphQL type definitions.
+ * Export a string which contains our graphql type definitions.
  */
 export const workspaceTypeDefs = `
 

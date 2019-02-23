@@ -35,7 +35,7 @@ class Navbar extends Component {
       <AppBar position="static" className={classes.root}>
         <Toolbar>
           <Typography variant="title" color="inherit" className={classes.grow}>
-            React + Redux + Material UI + JWT auth + GraphQL (Boilerplate)
+            React + Redux + Material UI + JWT auth + GraphQL + REST
           </Typography>
           {isAuthenticated &&
             <Button color="inherit" onClick={this.logout}>Logout</Button>

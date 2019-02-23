@@ -15,17 +15,17 @@ Please, follow these steps!
 mutation AddUser (
   $email: String,
   $password: String,
-  $firstName: String,
+  $username: String,
   $language: String
 ) {
  addUser(input: {
     email: $email,
     password: $password,
-    firstName: $firstName,
+    username: $username,
     language: $language
  }) {
     email,
-  	firstName,
+  	username,
   	language
   } 
 }
@@ -35,7 +35,7 @@ mutation AddUser (
 {
   "email": "example@gmail.com",
   "password": "example",
-  "firstName": "example",
+  "username": "example",
   "language": "en"
 }
 ```
@@ -63,7 +63,7 @@ Look up the bottom of Apollo web `HTTP HEADERS` tab like:
 query GetAllUsers {
   users {
     email,
-    firstName
+    username
   }
 }
 ```

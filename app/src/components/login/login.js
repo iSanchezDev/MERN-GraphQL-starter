@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import connect from 'react-redux/es/connect/connect';
-import {login, logout, verifyToken} from '../../actions/auth.actions';
+import {login, verifyToken} from '../../actions/auth.actions';
 
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -16,6 +16,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
+import SignUp from '../signup/signup';
 
 const styles = theme => ({
   root: {
@@ -99,7 +100,7 @@ class Login extends Component {
                 </Typography>
 
                 <Grid>
-                  <Grid xs={12}>
+                  <Grid item xs={12}>
                     <div style={{marginRight: 14}}>
                       <TextField
                         id="email"
@@ -168,9 +169,7 @@ class Login extends Component {
                       style={{height: 150, marginLeft: 0}}
                       className={classes.margin}>
                   <Grid item xs={4}>
-                    <Button color="primary" className={classes.button}>
-                      Sign up
-                    </Button>
+                   <SignUp/>
                   </Grid>
                   <Grid item xs={4}>
                     <Button variant="contained" color="secondary" onClick={() => this.handleSubmit()}>

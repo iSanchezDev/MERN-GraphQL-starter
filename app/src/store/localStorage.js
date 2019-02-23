@@ -5,6 +5,7 @@ class LocalStorage {
     this.token_key = 'token';
   }
 
+  // Authentication methods
   getToken() {
     return this.storage.getItem(this.token_key) || false;
   }
