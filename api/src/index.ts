@@ -13,14 +13,6 @@ import {verifyToken} from './controllers/auth/auth.controller';
 
 const port = process.env.PORT || 3001;
 
-/**
- * Mongodb database connection
- */
-mongoose.connect(
-  config.mongodb.uri,
-  { useNewUrlParser: true }
-);
-
 /*
  * Express config
  */
@@ -62,7 +54,17 @@ const server = new ApolloServer({
 
 server.applyMiddleware({app});
 
-app.listen(port,  () => {
-  console.log(`🚀 Server ready at http://localhost:${port}`);
-  console.log(`🔥 Apollo Web Client ready at http://localhost:${port}${server.graphqlPath}`);
-});
+/**
+ * Mongodb database and server connection
+ */
+mongoose.connect(config.mongodb.uri, { useNewUrlParser: true }).then(
+  () => {
+    console.log(`🐵 Mongodb at ${config.mongodb.uri}`);
+    app.listen(port,  () => {
+      console.log(`⚙️ Server ready at http://localhost:${port}`);
+      console.log(`🚀 Apollo Web Client ready at http://localhost:${port}${server.graphqlPath}`);
+    });
+  }, () => {
+    throw new Error('Mongodb is not running')
+  }
+);
