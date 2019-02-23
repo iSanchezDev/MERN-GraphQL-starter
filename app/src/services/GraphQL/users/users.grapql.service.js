@@ -6,7 +6,7 @@ import {fetchGraphQlData} from '../Base.graphql'
  * You can follow this example to complete the implementation
  * @param {object} data (query parameters)
  */
-export function GetAllUsers(data) {
+export function getAllUsers(data) {
 
   const query = `
     query GetAllUsers {
@@ -33,7 +33,7 @@ export function addUser(data) {
     mutation AddUser (
         $email: String!,
         $password: String!,
-        $username: String!,
+        $username: String,
         $language: String
       ) {
        addUser(input: {
