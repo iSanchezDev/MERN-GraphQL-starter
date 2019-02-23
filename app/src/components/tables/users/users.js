@@ -53,7 +53,7 @@ class UsersTable extends Component {
             <TableHead>
               <TableRow>
                 <TableCell>Email</TableCell>
-                <TableCell>First name</TableCell>
+                <TableCell>Username</TableCell>
                 <TableCell>language</TableCell>
               </TableRow>
             </TableHead>
@@ -61,7 +61,7 @@ class UsersTable extends Component {
               {users.map((row, index) => (
                 <TableRow key={`row_${index}`}>
                   <TableCell>{row.email}</TableCell>
-                  <TableCell>{row.firstName}</TableCell>
+                  <TableCell>{row.username}</TableCell>
                   <TableCell>{row.language}</TableCell>
                 </TableRow>
               ))}

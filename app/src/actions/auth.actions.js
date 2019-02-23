@@ -54,4 +54,4 @@ export const verifyToken = () => async dispatch => {
     LocalStorage.removeToken();
     dispatch(logoutAction());
   }
-}
+};
