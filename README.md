@@ -35,9 +35,7 @@ I have a REST service on express for `login` and `logout` users in a secure mode
 
 ## Installation
 
-Go to `./app` and `./api` folders and follow their READMEs files
-
-😊👍
+Go to `./app` and `./api` folders and follow their READMEs files 😊👍
 
 ## Demo Gif
 
