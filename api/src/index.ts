@@ -42,7 +42,7 @@ const server = new ApolloServer({
 
     // graphql functions allowed without token access
     const query = req.body.operationName;
-    const allowed = _.find(allowedQueries, (name) => name === query);
+    const allowed = _.find(allowedQueries, (name) => _.findIndex(query, name));
     if (allowed) {
       return true
     }
