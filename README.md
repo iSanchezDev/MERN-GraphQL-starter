@@ -8,7 +8,7 @@ This project aims to get `GraphQL` `query` and `mutation` examples from the clie
 
 ## Client
 
-The client allows you to connect with the `GraphQL API` it request a user list and also adding users as example.
+The client allows you to connect with the `GraphQL API` it requests a user list and also adding users as example.
 
 ## API
 
@@ -35,7 +35,7 @@ I have a REST service on express for `login` and `logout` users in a secure mode
 
 ## Installation
 
-Go to `./app` and `./api` folders and follow their READMEs files 😊👍
+Go to `./app` and `./api` folders and follow their README files 😊👍
 
 ## Demo Gif
 
