@@ -1,5 +1,5 @@
 
-import * as UsersGraphService from '../services/graphql/users/users.grapql.service'
+import * as UsersGraphService from '../services/GraphQL/users/users.grapql.service'
 import {login} from './auth.actions'
 
 const setUsers = (data) => ({
@@ -22,7 +22,7 @@ export const addUser = (params) => async dispatch => {
 
 export const fetchUsers = (params) => async dispatch => {
   try {
-    const data = await UsersGraphService.GetAllUsers(params);
+    const data = await UsersGraphService.getAllUsers(params);
     dispatch(setUsers(data.users));
   } catch (e) {
     console.error(e.message);
