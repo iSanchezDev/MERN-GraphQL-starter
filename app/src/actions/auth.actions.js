@@ -14,11 +14,6 @@ const logoutAction = () => ({
   type: 'AUTH_LOGOUT'
 });
 
-const receiveProfile = (data) => ({
-  type: 'AUTH_RECEIVE_PROFILE',
-  data
-});
-
 /**
  * Sync and async action creators
  */
@@ -46,8 +41,7 @@ export const verifyToken = () => async dispatch => {
     return
   }
   try {
-    const user =await AuthService.verifyToken(LocalStorage.getToken());
-    dispatch(receiveProfile(user));
+    await AuthService.verifyToken(LocalStorage.getToken());
     dispatch(loginSuccess());
   } catch (e) {
     console.error(e.message); // remove token and logout if invalid

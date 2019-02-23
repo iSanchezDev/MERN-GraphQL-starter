@@ -4,7 +4,7 @@
 
 ## Description
 
-This project aims to get `GraphQL` `query` and `mutation` examples from the client side made for a `MERN` stack development.
+This project aims to get `GraphQL` `query` and `mutation` examples from the client side made for `MERN` stack development.
 
 ## Client
 
@@ -19,7 +19,7 @@ Run your queries safely on this tool even in your future production environment 
 
 I have a REST service on express for `login` and `logout` users in a secure mode isolated from GraphQL.
 
-## Features of Client and Server (WIP)
+## Features
 
 -	React application with [create-react-app](https://github.com/facebook/create-react-app)
 - [Redux](https://es.redux.js.org)
