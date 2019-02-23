@@ -14,7 +14,7 @@ export const userTypeDefs = `
     workspace: Workspace
     email: String!
     password: String!
-    username: String!
+    username: String
     language: String
   }
 

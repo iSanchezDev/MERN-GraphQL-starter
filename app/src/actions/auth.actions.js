@@ -24,7 +24,7 @@ export const login = (params) => async dispatch => {
     LocalStorage.setToken(token);
     dispatch(loginSuccess());
   } catch (e) {
-    console.error(e.message);
+    console.error(e);
     dispatch(loginFailure());
   }
 };
