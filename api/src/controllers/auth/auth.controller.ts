@@ -52,7 +52,7 @@ async function createToken(email, password) {
  * @return User
  * @param {string} token
  */
-async function checkUserAuthenticated(token) {
+export async function checkUserAuthenticated(token) {
 
   if (!token) {
     throw new Error('No token provided on headers')

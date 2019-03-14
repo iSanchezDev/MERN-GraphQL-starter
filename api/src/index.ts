@@ -9,7 +9,7 @@ import mongoose from 'mongoose';
 import authRoutes from './routes/auth.routes';
 import { AuthenticationError } from 'apollo-server';
 import { ApolloServer } from 'apollo-server-express';
-import {verifyToken} from './controllers/auth/auth.controller';
+import {checkUserAuthenticated, verifyToken} from './controllers/auth/auth.controller';
 import bodyParser from 'body-parser';
 
 const port = process.env.PORT || 3001;
@@ -39,12 +39,19 @@ const server = new ApolloServer({
 
     // Graphql functions allowed without token access
     const query = req.body.operationName;
-    const allowed = _.find(allowedQueries, (name) => query.toLowerCase() === name.toLowerCase());
-    if (allowed) {return true;}
+    if (query) {
+      const allowed = _.find(allowedQueries, (name) => query.toLowerCase() === name.toLowerCase());
+      if (allowed) {
+        return true;
+      }
+    }
 
     // Authorization token
-    const auth: any = await verifyToken(req, res);
-    if (auth.user) {return true;}
+    const token = _.get(req, 'headers.authorization');
+    const auth: any = await checkUserAuthenticated(token);
+    if (auth.user) {
+      return auth.user;
+    }
 
     throw new AuthenticationError('You must be logged in!');
   },
