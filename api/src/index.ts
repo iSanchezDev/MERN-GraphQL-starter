@@ -35,7 +35,7 @@ const server = new ApolloServer({
     console.warn(error);
     return error;
   },
-  async context({ req, res }) {
+  async context({ req }) {
 
     // Graphql functions allowed without token access
     const query = req.body.operationName;
