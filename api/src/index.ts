@@ -10,6 +10,7 @@ import authRoutes from './routes/auth.routes';
 import { AuthenticationError } from 'apollo-server';
 import { ApolloServer } from 'apollo-server-express';
 import {verifyToken} from './controllers/auth/auth.controller';
+import bodyParser from 'body-parser';
 
 const port = process.env.PORT || 3001;
 
@@ -18,35 +19,32 @@ const port = process.env.PORT || 3001;
  */
 const app = express();
 app.use(cors());
+app.use(bodyParser.json());
 
 /*
  * Customize your routes
  */
 app.use('/auth', authRoutes);
 
+/*
+ * Apollo server config
+ */
 const server = new ApolloServer({
   schema,
   formatError(error) {
     console.warn(error);
     return error;
   },
-  async context({ req }) {
+  async context({ req, res }) {
 
     // Graphql functions allowed without token access
     const query = req.body.operationName;
-    const allowed = _.find(allowedQueries, (name) => _.findIndex(query, name));
-    if (allowed) {
-      return true
-    }
+    const allowed = _.find(allowedQueries, (name) => query.toLowerCase() === name.toLowerCase());
+    if (allowed) {return true;}
 
     // Authorization token
-    const token = req && req.headers && req.headers.authorization;
-    if (token) {
-      const user: any = await verifyToken(token);
-      if (user) {
-        return {user};
-      }
-    }
+    const auth: any = await verifyToken(req, res);
+    if (auth.user) {return true;}
 
     throw new AuthenticationError('You must be logged in!');
   },
